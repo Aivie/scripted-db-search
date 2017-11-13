@@ -10,13 +10,19 @@ function getVersion(handleVersion) {
     // the database snapshot and passes it as an argument to the 'handleVersion'
     // callback.
     
-    //var version = snapshot.val();
-    //handleVersion(version);
+    var version = snapshot.val();
+    handleVersion(version);
   });
 }
 
 function getHelloWorldValue(handleType) {
   // TODO: Your code goes here. Hint: use 'getVersion' as a template.
+  var database = firebase.database();
+  var databaseTypeReference = database.ref('/db-search/hello-world');
+  databaseTypeReference.once('value').then(function(snapshot){
+    var type = snapshot.val();
+    handleType(type);
+  })
 }
 
 function applyDiscount(handleNewPrice) {
